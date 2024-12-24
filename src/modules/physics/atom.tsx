@@ -72,7 +72,7 @@ const Orbit: React.FC<{ radius: number; color: string; rotationAxis: THREE.Vecto
   return (
     <group ref={orbitRef}>
       <mesh>
-        <ringGeometry args={[radius - 0.05, radius + 0.05, 128, 1]} />
+        <torusGeometry args={[radius, 0.01, 16, 100]} />
         <meshBasicMaterial color={color} side={THREE.DoubleSide} />
       </mesh>
     </group>
