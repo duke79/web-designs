@@ -1,67 +1,65 @@
-import React from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import * as THREE from "three";
+import React, { useState } from "react";
 import Atom from "../modules/physics/atom";
 
-// const Electron = ({ radius, speed }: { radius: number; speed: number }) => {
-//   const ref = React.useRef<THREE.Mesh>(null!);
-//   const angle = React.useRef(0);
-
-//   useFrame(() => {
-//     angle.current += speed;
-//     const x = radius * Math.cos(angle.current);
-//     const z = radius * Math.sin(angle.current);
-//     ref.current.position.set(x, 0, z);
-//   });
-
-//   return (
-//     <mesh ref={ref}>
-//       <sphereGeometry args={[0.1, 16, 16]} />
-//       <meshStandardMaterial color="blue" />
-//     </mesh>
-//   );
-// };
-
-// const Atom = () => {
-//   return (
-//     <>
-//       {/* Nucleus */}
-//       <mesh>
-//         <sphereGeometry args={[0.5, 32, 32]} />
-//         <meshStandardMaterial color="red" />
-//       </mesh>
-
-//       {/* Electrons */}
-//       <Electron radius={2} speed={0.03} />
-//       <Electron radius={3} speed={0.02} />
-//       <Electron radius={4} speed={0.01} />
-//     </>
-//   );
-// };
-
-// const AtomScene = () => {
-//   return (
-//     <Canvas>
-//       {/* Lights */}
-//       <ambientLight intensity={0.5} />
-//       <pointLight position={[10, 10, 10]} />
-
-//       {/* Atom */}
-//       <Atom />
-
-//       {/* Controls */}
-//       <OrbitControls />
-//     </Canvas>
-//   );
-// };
-
 export default function App() {
+  const [activeItem, setActiveItem] = useState("Atom");
+
+  const handleItemClick = (itemName: string) => {
+    setActiveItem(itemName);
+  };
+
   return (
-    <div style={{ width: "100vw", height: "100vh" }}>
-      {/* <AtomScene /> */}
-      <Atom/>
+    <div className="flex w-screen h-screen">
+      <div className="sidebar w-1/5 p-5 bg-gray-200">
+        {/* Sidebar Content */}
+        <ul className="space-y-2 font-medium">
+          <li>
+            <a
+              href="#"
+              className={`flex items-center p-4 text-gray-900 rounded-lg hover:bg-gray-100 group text-xl ${
+                activeItem === "Atom" ? "bg-gray-100 text-blue-700" : ""
+              }`}
+              onClick={() => handleItemClick("Atom")}
+            >
+              <svg
+                className={`w-5 h-5 transition duration-75 ${
+                  activeItem === "Atom" ? "text-blue-700" : "text-gray-500 group-hover:text-gray-900"
+                }`}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <circle cx="10" cy="10" r="3" fill="currentColor" />
+                <g>
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="8"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    fill="transparent"
+                  />
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="6"
+                    stroke="currentColor"
+                    strokeWidth="1"
+                    fill="transparent"
+                  />
+                </g>
+              </svg>
+              <span className="ml-3">Atom</span>
+            </a>
+          </li>
+          {/* Add more sidebar items here if needed */}
+        </ul>
+      </div>
+      <div className="content w-4/5 p-5 bg-gray-100">
+        {/* Main Content */}
+        <Atom />
+      </div>
     </div>
   );
 }
