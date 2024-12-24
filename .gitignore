@@ -3,3 +3,7 @@ node_modules
 dist
 .eslintcache
 yarn.lock
+.aider.chat.history.md
+.aider.input.history
+.aider*
+.env
