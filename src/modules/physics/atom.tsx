@@ -95,7 +95,7 @@ const Electron: React.FC<{
   return (
     <>
       <mesh ref={mesh}>
-        <sphereGeometry args={[0.2, 16, 16]} />
+        <sphereGeometry args={[1, 16, 16]} />
         <meshBasicMaterial color={color} />
       </mesh>
       <Orbit
@@ -125,7 +125,7 @@ const Orbit: React.FC<{
   return (
     <group ref={orbitRef}>
       <mesh>
-        <torusGeometry args={[radius, 0.01, 16, 100]} />
+        <torusGeometry args={[radius, 0.1, 16, 100]} />
         <meshStandardMaterial color={color} />
       </mesh>
     </group>
@@ -136,7 +136,7 @@ const Atom = ({ numElectrons }: { numElectrons: number }) => {
   const electronsData = useMemo(() => {
     const data = [];
     for (let i = 0; i < numElectrons; i++) {
-      const orbitRadius = 4 + i * 2;
+      const orbitRadius = 40 + i * 2;
       const speed = 1 / (i + 1);
       const color = ["blue", "green", "yellow", "orange", "cyan", "magenta"][
         i % 6
